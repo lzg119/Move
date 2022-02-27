@@ -12,13 +12,18 @@ public class CtrlHuman : BaseHuman {
     new void Update(){
         base.Update();
         if(Input.GetMouseButtonDown(0)){
-            Debug.Log("mouse gogo");
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             Physics.Raycast(ray, out hit);
             Debug.Log(hit.collider.tag);
             if(hit.collider.tag == "Terrain"){
                 MoveTo(hit.point);
+                string sendStr="Move|";
+                sendStr += NetManager.GetDesc() +  ",";
+                sendStr += hit.point.x.ToString() + ",";
+                sendStr += hit.point.y.ToString() + ",";
+                sendStr += hit.point.z.ToString() + ",";
+                NetManager.Send(sendStr);
             }
         }
     }

@@ -7,6 +7,8 @@ public class BaseHuman : MonoBehaviour{
     private Vector3 targetPosition;
     public float speed = 1.2f;
     private Animator animator;
+    public string decs = "";
+    public int hp = -1;
     // Start is called before the first frame update
     protected void Start(){
         animator = GetComponent<Animator>();
